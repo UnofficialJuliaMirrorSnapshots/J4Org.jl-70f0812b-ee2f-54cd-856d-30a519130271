@@ -1,0 +1,101 @@
+# [[file:~/GitHub/J4Org.jl/docs/main.org::*Minimal%20OrgMode%20document][Minimal OrgMode document:1]]
+#+PROPERTY: header-args:jupyter-julia :session *julia_session* :exports both :eval no-export :results output drawer
+#+OPTIONS: ^:{}
+#+TITLE: Getting Started with a minimal example
+
+#+BEGIN_SRC jupyter-julia :exports none
+;cd("/home/picaud/GitHub/J4Org.jl/docs/minimal_example/")
+pwd()
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+:END:
+
+#+BEGIN_SRC jupyter-julia :exports none
+pushfirst!(LOAD_PATH,pwd())
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+:END:
+
+#+BEGIN_SRC jupyter-julia :exports none
+using J4Org 
+initialize_boxing_module(usedModules=["Foo"]) 
+documented_items=create_documented_item_array("Foo.jl")
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+:END:
+
+* Example
+
+Prints all documented items, except those tagged with "Internal" 
+
+#+BEGIN_SRC jupyter-julia :exports results
+print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+<<hTsspxsk>> *Index:* *[A]* [[ybyl8eDu][Alpha]] *[P]* [[KStWMmA3][Point]] *[n]* [[DkcLbSl1][norm]] 
+- @@latex:\phantomsection@@ *=Alpha=*  <<ybyl8eDu>>
+#+BEGIN_SRC julia :eval never :exports code
+@enum Alpha A=1 B C 
+#+END_SRC
+#+BEGIN_QUOTE
+An enum
+#+END_QUOTE
+[[file:Foo.jl::31][Foo.jl:31]], [[hTsspxsk][back to index]]
+- @@latex:\phantomsection@@ *=Point=*  <<KStWMmA3>> <<chQXbvYhPoint_struct>>
+#+BEGIN_SRC julia :eval never :exports code
+struct Point
+#+END_SRC
+#+BEGIN_QUOTE
+This is my Point structure
+
+*Example:*
+
+Creates a point $p$ of coordinates $(x=1,y=2)$.
+
+#+BEGIN_SRC julia :eval never :exports code
+p=Point(1,2)
+#+END_SRC
+
+You can add any valid Org mode directive. If you want to use
+in-documentation link, use [[chQXbvYhnorm_link_example][norm(...)]]
+#+END_QUOTE
+[[file:Foo.jl::8][Foo.jl:8]], [[hTsspxsk][back to index]]
+
+#+BEGIN_SRC julia :eval never :exports code
+Point()
+#+END_SRC
+#+BEGIN_QUOTE
+Creates Point at origin $(0,0)$ 
+#+END_QUOTE
+[[file:Foo.jl::27][Foo.jl:27]], [[hTsspxsk][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<DkcLbSl1>> <<chQXbvYhnorm_link_example>>
+#+BEGIN_SRC julia :eval never :exports code
+norm(p::Point)::Float64
+#+END_SRC
+#+BEGIN_QUOTE
+A simple function that computes $\sqrt{x^2+y^2}$
+
+*Example:*
+#+BEGIN_SRC julia
+p=Point(1.0,2.0);
+norm(p) 
+#+END_SRC
+#+BEGIN_SRC julia
+***ERROR***  UndefVarError(:norm)
+#+END_SRC
+
+See: [[chQXbvYhPoint_struct][struct Point]]
+#+END_QUOTE
+[[file:Foo.jl::35][Foo.jl:35]], [[hTsspxsk][back to index]]
+# =WARNING:= An error occurred evaluating norm(p) 
+:END:
+
+# Minimal OrgMode document:1 ends here

@@ -1,0 +1,5 @@
+*~
+/docs/minimal_example/.juliahistory
+docs/_minted-main/*
+/docs/main.bbl
+/docs/main.tex
